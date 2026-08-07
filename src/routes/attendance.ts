@@ -40,6 +40,33 @@ router.post("/screenings/:id/attendance", async (req, res) => {
   res.status(201).json(created);
 });
 
+router.delete("/screenings/:id/attendance", async (req, res) => {
+  const { id: screeningId } = req.params;
+  const { userId } = req.body;
+
+  if (!userId) {
+    return res.status(400).json({ error: "userId is required" });
+  }
+
+  const [existing] = await db
+    .select()
+    .from(attendance)
+    .where(
+      and(
+        eq(attendance.userId, userId),
+        eq(attendance.screeningId, screeningId),
+      ),
+    );
+
+  if (!existing) {
+    return res.status(404).json({ error: "Attendance not found " });
+  }
+
+  await db.delete(attendance).where(eq(attendance.id, existing.id));
+
+  return res.status(200).json({ message: "Attendance deleted" });
+});
+
 router.get("/screenings/:id/attendance", async (req, res) => {
   const { id: screeningId } = req.params;
 
