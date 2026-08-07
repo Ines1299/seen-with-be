@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { db } from "../pool";
-import { cinemas, films, screenings } from "../schema";
+import { cinemas, films, screenings, users } from "../schema";
 
 async function seed() {
   const [princeCharles] = await db
@@ -33,6 +33,16 @@ async function seed() {
     price: "12.50",
     ticketUrl: "https://princecharlescinema.com",
   });
+
+  const [user] = await db
+    .insert(users)
+    .values({
+      displayName: "Ines",
+    })
+    .returning();
+  if (!user) {
+    throw new Error("Failed to insert user");
+  }
 
   console.log("Seeded!");
   process.exit(0);
