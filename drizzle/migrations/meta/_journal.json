@@ -15,6 +15,13 @@
       "when": 1786114700927,
       "tag": "0001_white_marvex",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1786124187785,
+      "tag": "0002_purple_goliath",
+      "breakpoints": true
     }
   ]
 }

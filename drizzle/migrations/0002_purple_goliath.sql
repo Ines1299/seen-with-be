@@ -1,0 +1,2 @@
+ALTER TABLE "screenings" ADD COLUMN "last_seen_at" timestamp with time zone DEFAULT now() NOT NULL;--> statement-breakpoint
+ALTER TABLE "screenings" ADD CONSTRAINT "screenings_cinema_external_id_unique" UNIQUE("cinema_id","external_id");
