@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import { pool } from "./db/pool";
+import screeningsRouter from "./routes/screenings";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,5 +18,7 @@ pool
 app.get("/health", (_req, res) => {
   res.json({ status: "ok" });
 });
+
+app.use(screeningsRouter);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
