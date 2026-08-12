@@ -38,6 +38,6 @@ describe("DELETE /screenings/:id/attendance", () => {
       .delete(`/screenings/${screeningId}/attendance`)
       .send({ userId });
 
-    expect(res.status).toBe(200);
+    expect(res.status).toBe(204);
   });
 });
